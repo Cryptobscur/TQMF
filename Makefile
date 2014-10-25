@@ -1,8 +1,6 @@
-run: main
-	./main
 
-main: main.o decalage.o
-	gcc -Wall -o main main.o decalage.o
+all: main.o decalage.o
+	gcc -Wall -o tqmf main.o decalage.o
 
 main.o: main.c decalage.h
 	gcc -c -Wall main.c
