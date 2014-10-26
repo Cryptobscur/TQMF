@@ -36,7 +36,7 @@ CERTIFICATION chiffrement_message(char* message, CLE k)
 		
 		int intermediaire = caractere_lu + (k % TAILLE_ALPHABET);
 		
-		(intermediaire <= BORNE_SUP) ? ((*message) = intermediaire) : ((*message) = ((intermediaire % (BORNE_SUP + 1)) + BORNE_INF));
+		(intermediaire <= BORNE_SUP) ? ((*message) = intermediaire) : ((*message) = (intermediaire - TAILLE_ALPHABET));
 		
 		message++; // la chaîne provient du terminal et ne subit aucun traitement avant l'appel de cette fonction,
 				   // on est donc restreint par le caractère nul de fin de chaîne, et ainsi l'incrémention n'est pas censée donner d'overflow
@@ -61,7 +61,7 @@ CERTIFICATION dechiffrement_message(char* message, CLE k)
 		
 		int intermediaire = caractere_lu - (k % TAILLE_ALPHABET);
 		
-		(intermediaire >= BORNE_INF) ? ((*message) = intermediaire) : ((*message) = ((intermediaire % (BORNE_INF - TAILLE_ALPHABET)) + BORNE_INF));
+		(intermediaire >= BORNE_INF) ? ((*message) = intermediaire) : ((*message) = (intermediaire + TAILLE_ALPHABET));
 		
 		message++; // la chaîne provient du terminal et ne subit aucun traitement avant l'appel de cette fonction,
 				   // on est donc restreint par le caractère nul de fin de chaîne, et ainsi l'incrémention n'est pas censée donner d'overflow
