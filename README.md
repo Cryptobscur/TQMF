@@ -2,5 +2,12 @@
 ====
 
 TQMF (Tu Quoque Mi Fili) est une simple application de chiffrement / déchiffrement par décalage. Le mininum requis est de savoir utiliser un terminal.
+<br>
+### Avancement
 
-L'implémentation est en cours, une documentation sera créée par la suite pour détailler son utilisation.
+Implémentation : terminée<br>
+Débogage : terminé (en parrallèle de l'implémentation)<br>
+Optimisation : terminée ?<br>
+Peaufinage (commentaires, etc.) : en cours<br>
+Wiki : en cours<br>
+Documentation : non commencée
