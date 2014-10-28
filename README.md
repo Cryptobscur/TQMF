@@ -9,5 +9,5 @@ Implémentation : terminée<br>
 Débogage : terminé (en parrallèle de l'implémentation)<br>
 Optimisation : terminée ?<br>
 Peaufinage (commentaires, etc.) : terminé<br>
-Wiki : en cours<br>
+Wiki : terminé<br>
 Documentation : non commencée
