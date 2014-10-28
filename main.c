@@ -5,18 +5,18 @@
 
 int main(int argc, char* argv[])
 {
-	if(argc != 4) // nom du programme + le mode + la clé + la chaîne à chiffrer (ou déchiffrer)
+	if(argc != 4) // le nom du programme + le mode + la clé + le composant à chiffrer ou déchiffrer
 	{
-		fprintf(stderr, "\nErreur : vous devez renseigner un mode (chiffrement ou déchiffrement), une clé et une chaîne.\n\n");
+		fprintf(stderr, "\nErreur : vous devez renseigner un mode (chiffrement ou déchiffrement), une clé et un composant à chiffrer.\n\n");
 		exit(1);
 	}
 	
-	CERTIFICATION retour = -1;
+	CERTIFICATION retour;
 	char* res_mode;
 	
 	int l_mode = strlen(argv[1]);
 	
-	if(l_mode == 2)
+	if(l_mode == 2) // modes par chaîne directe
 	{
 		if(strcmp(argv[1], "-c") == 0)
 		{
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 		}
 		else if(strcmp(argv[1], "-d") == 0)
 		{
-			retour = dechiffrement_message(argv[3], atoi(argv[2])); // atoi ne prendra en compte que les caractères numériques de la clé
+			retour = dechiffrement_message(argv[3], atoi(argv[2])); // idem
 			res_mode = "déchiffré";																	
 		}
 		else
@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 		
 		switch(retour)
 		{
-			case 0: printf("\nVotre message à été %s avec succès !\nLe résultat est : %s.\n\n", res_mode, argv[3]); // la chaîne est modifée directement dans les fonctions
+			case 0: printf("\nVotre message à été %s avec succès !\nLe résultat est : %s.\n\n", res_mode, argv[3]);
 					break;
 			
 			case 1: fprintf(stderr, "\nErreur : votre clé doit spécifier une valeur positive.\n\n");
@@ -44,8 +44,6 @@ int main(int argc, char* argv[])
 					
 			case 2: fprintf(stderr, "\nErreur : le chiffrement a échoué car un ou plusieurs caractères de la chaîne sont invalides.\n\n");
 					break;
-			
-			default: break;
 		}
 	}
 	else if(l_mode == 3) // modes par fichier
@@ -57,7 +55,7 @@ int main(int argc, char* argv[])
 		}
 		else if(strcmp(argv[1], "-df") == 0)
 		{
-			retour = dechiffrement_fichier(argv[3], atoi(argv[2])); // atoi ne prendra en compte que les caractères numériques de la clé
+			retour = dechiffrement_fichier(argv[3], atoi(argv[2])); // idem
 			res_mode = "déchiffré";
 		}
 		else
@@ -68,7 +66,7 @@ int main(int argc, char* argv[])
 		
 		switch(retour)
 		{
-			case 0: printf("\nVotre message à été %s avec succès !\nLe résultat est disponible dans le fichier associé.\n\n", res_mode); // la chaîne est modifée directement dans les fonctions
+			case 0: printf("\nVotre message à été %s avec succès !\nLe résultat est disponible dans le fichier associé.\n\n", res_mode);
 					break;
 			
 			case 1: fprintf(stderr, "\nErreur : votre clé doit spécifier une valeur positive.\n\n");
@@ -82,8 +80,6 @@ int main(int argc, char* argv[])
 			
 			case 4: fprintf(stderr, "\nErreur : impossible de créer le fichier du résultat.\n\n");
 					break;
-					
-			default: break;
 		}
 	}
 	else 

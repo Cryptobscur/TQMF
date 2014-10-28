@@ -1,12 +1,16 @@
 #include "decalage.h"
 #include <string.h>
 
+/* Définitions de constantes afin de changer
+ * très facilement d'alphabet de traitement */
+ 
 #define BORNE_INF 'a'
 #define BORNE_SUP 'z'
 #define TAILLE_ALPHABET 26
 
 typedef int boolean; // Ce type ne doit prendre que les valeurs 0 ou 1
 
+/* Détermine si la clé entrée est valable */
 boolean cleValable(CLE k)
 {
 	if(k < 0)
@@ -14,6 +18,8 @@ boolean cleValable(CLE k)
 	else return 1;
 }
 
+/* Détermine si le caractère à chiffrer ou déchiffrer 
+ * se trouve dans l'alphabet de traitement */
 boolean estDansAlphabet(char caractere)
 {
 	if(caractere >= BORNE_INF && caractere <= BORNE_SUP)
@@ -30,15 +36,14 @@ CERTIFICATION chiffrement_message(char* message, CLE k)
 	
 	while((caractere_lu = (*message)) != '\0')
 	{
-		if(!estDansAlphabet(caractere_lu)) // les caracteres supportés pour l'instant sont ceux de 'a' à 'z' (extension envisagée)
+		if(!estDansAlphabet(caractere_lu)) // les caracteres supportés actuellement sont ceux de 'a' à 'z'
 			return 2;
 		
 		int intermediaire = caractere_lu + (k % TAILLE_ALPHABET);
 		
 		(intermediaire <= BORNE_SUP) ? ((*message) = intermediaire) : ((*message) = (intermediaire - TAILLE_ALPHABET));
 		
-		message++; // la chaîne provient du terminal et ne subit aucun traitement avant l'appel de cette fonction,
-				   // on est donc restreint par le caractère nul de fin de chaîne, et ainsi l'incrémention n'est pas censée donner d'overflow
+		message++;
 	}
 	
 	return 0;
@@ -53,20 +58,21 @@ CERTIFICATION dechiffrement_message(char* message, CLE k)
 	
 	while((caractere_lu = (*message)) != '\0')
 	{
-		if(!estDansAlphabet(caractere_lu)) // les caracteres supportés pour l'instant sont ceux de 'a' à 'z' (extension envisagée)
+		if(!estDansAlphabet(caractere_lu)) // les caracteres supportés actuellement sont ceux de 'a' à 'z'
 			return 2;
 		
 		int intermediaire = caractere_lu - (k % TAILLE_ALPHABET);
 		
 		(intermediaire >= BORNE_INF) ? ((*message) = intermediaire) : ((*message) = (intermediaire + TAILLE_ALPHABET));
 		
-		message++; // la chaîne provient du terminal et ne subit aucun traitement avant l'appel de cette fonction,
-				   // on est donc restreint par le caractère nul de fin de chaîne, et ainsi l'incrémention n'est pas censée donner d'overflow
+		message++;
 	}
 	
 	return 0;
 }
 
+/* Crée le nom du fichier clair ou chiffré. la chaîne 'ajout' est ajoutée à la fin
+ * et la chaîne 'suppression' est supprimée si elle existe dans 'nom_fichier' */
 char* creerNom(char* nom_fichier, char* ajout, char* suppression)
 {	
 	/* Initialisation de quelques variables pour le traitement */
@@ -116,6 +122,7 @@ char* creerNom(char* nom_fichier, char* ajout, char* suppression)
 	return nom_chiffre;
 }
 
+/* Crée le nom du fichier clair ou chiffré selon le mode spécifié*/
 char* creerNomFichier(char* nom_fichier, char mode)
 {
 	char* ajout;	
