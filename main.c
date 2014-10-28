@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 			retour = chiffrement_fichier(argv[3], atoi(argv[2])); // atoi ne prendra en compte que les caractères numériques de la clé
 			res_mode = "chiffré";
 		}
-		else if(strcmp(argv[1], "-cd") == 0)
+		else if(strcmp(argv[1], "-df") == 0)
 		{
 			retour = dechiffrement_fichier(argv[3], atoi(argv[2])); // atoi ne prendra en compte que les caractères numériques de la clé
 			res_mode = "déchiffré";
